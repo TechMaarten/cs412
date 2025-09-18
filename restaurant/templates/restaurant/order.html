@@ -1,0 +1,29 @@
+{% extends 'restaurant/base.html' %}
+
+{% block content %}
+<div>
+    <h2>Place your order</h2>
+    <p><strong>Today's Special is </strong>{{ daily_special }}</p>
+
+    <form method="POST">
+        {% csrf_token %}
+        <label><input type="checkbox", name="items[]", value="Steak+Sushi"> Steak+Sushi (33)</label><br>
+        <label><input type="checkbox", name="items[]", value="Ahi Tuna Poke Bowl"> Ahi Tuna Poke Bowl (27)</label><br>
+        <label><input type="checkbox", name="items[]", value="Aburi Salmon Sushi Press"> Aburi Salmon Sushi Press (21)</label><br>
+        <label><input type="checkbox", name="items[]", value="Jumbo Lump Crab Cake"> Jumbo Lump Crab Cake (26)</label><br>
+        <label><input type="checkbox", name="items[]", value="Special"> Special (25)</label><br><br>
+
+        <label>Special Instruction:<br>
+            <textarea name="instructions"></textarea>
+        </label><br><br>
+
+        <h3>Your Info:</h3>
+        <label>Name: <input type="text" name="name"></label><br>
+        <label>Phone: <input type="text" name="phone"></label><br>
+        <label>Email: <input type="email" name="email"></label><br><br>
+
+        <button type="submit" formaction="{% url 'confirmation' %}">Submit Order</button>
+    </form>
+</div>
+
+{% endblock content %}
