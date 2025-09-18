@@ -27,6 +27,7 @@ def confirmation(request):
     total = 0
     if request.POST:
         selected_items = request.POST.getlist('items[]')
+        poke_toppings = request.POST.getlist('poke_toppings[]')
 
         prices = {
             'Steak+Sushi': 33,
@@ -50,6 +51,7 @@ def confirmation(request):
 
         context = {
             'items': selected_items,
+            'poke_toppings': poke_toppings,
             'total': total,
             'name': customer_name,
             'email': customer_email,

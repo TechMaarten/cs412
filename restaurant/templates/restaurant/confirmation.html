@@ -6,6 +6,14 @@
         <p>Thank you, {{ name }}! Your order has been received.</p>
         <p>We'll contact you at {{ phone_number }} or {{ email }}.</p>
         <p><strong>Items ordered:</strong> {{ items|join:", " }}</p>
+        {% if 'Ahi Tuna Poke Bowl' in items %}
+            {% if poke_toppings %}
+            <p><strong>Poke Bowl Customizations:</strong></p>
+            <ul>
+                <li><strong>Toppings:</strong> {{ poke_toppings|join:", " }}</li>
+            {% endif %}
+            </ul>
+        {% endif %}
         <p><strong>Total:</strong> ${{ total }}</p>
         <p><strong>Ready by:</strong> {{ time }}</p>
         <p><em>Special instructions:</em> {{ instructions }}</p>
