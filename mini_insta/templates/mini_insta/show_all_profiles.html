@@ -1,0 +1,15 @@
+<!---show all profiles-->
+{% extends 'mini_insta/base.html' %}
+{% block content %}
+<div class="profile-grid">
+    <!-- Loop through each profile object passed into the view -->
+    {% for profile in object_list %}
+    <div class="profile-card">
+        <a href="{% url 'show_profile' profile.pk %}">
+            <img src="{{ profile.profile_image_url }}" width="200">
+        </a>
+        <p>{{ profile.display_name }}</p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

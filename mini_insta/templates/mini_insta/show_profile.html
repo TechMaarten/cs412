@@ -1,0 +1,11 @@
+<!---show each individual profile-->
+{% extends 'mini_insta/base.html' %}
+{% block content %}
+<!-- Display each detail -->
+    <h2>{{ object.display_name }}</h2>
+    <img src="{{ object.profile_image_url }}" width="200">
+    <p>@{{ object.username }}</p>
+    <p>{{ object.bio_text }}</p>
+    <p>Joined on: {{ object.join_date }}</p>
+    <a href="{% url 'show_all_profiles' %}">Back to all profiles</a>
+{% endblock %}

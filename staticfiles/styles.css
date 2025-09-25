@@ -5,8 +5,9 @@ body {
 }
 
 img {
-    max-width: 300px;
-    margin: 10px;
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
 }
 
 nav a {
