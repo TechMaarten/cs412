@@ -2,14 +2,29 @@ body {
     font-family: Arial, sans-serif;
     background-color: #fdf6f0;
     padding: 20px;
+    text-align: center; 
 }
 
-img {
+.profile-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; 
+    gap: 20px;
+    margin-top:20px;
+}
+
+.profile-card {
+    background-color: white;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-sizing: border-box;
+    width: 250px;
+    text-align: left; 
+}
+
+.profile-card img {
     width: 100%;
     height: auto;
     border-radius: 5px;
-}
-
-nav a {
-    margin-right: 15px;
 }
