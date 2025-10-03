@@ -6,6 +6,24 @@
     <img src="{{ object.profile_image_url }}" width="200">
     <p>@{{ object.username }}</p>
     <p>{{ object.bio_text }}</p>
+    <a href="{% url 'create_post' object.pk %}">+ New Post</a>
+    <p>Total posts: {{ object.get_all_posts.count }}</p>
+    <h3>Posts</h3>
+    <div class="post-grid">
+    {% for post in object.get_all_posts %}
+        <div class="post-preview">
+            <a href="{% url 'show_post' post.pk %}">
+                {% if post.get_all_photos %}
+                    <img src="{{ post.get_all_photos.0.image_url}}" alt="Post image">
+                {% else %}
+                    <p>No image available</p>
+                {% endif %}
+            </a>
+            <p>{{ post.caption }}</p>
+            <p>{{ post.timestamp }}</p>
+        </div>
+    {% endfor %}
+    </div>
     <p>Joined on: {{ object.join_date }}</p>
     <a href="{% url 'show_all_profiles' %}">Back to all profiles</a>
 {% endblock %}

@@ -28,3 +28,25 @@ body {
     height: auto;
     border-radius: 5px;
 }
+
+.post-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    justify-items: center;
+}
+
+.post-preview {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    width: 200px;          
+    text-align: center;     
+}
+
+.post-preview img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
