@@ -6,23 +6,23 @@ from django.urls import reverse
 from django.shortcuts import get_object_or_404
 from .forms import CreatePostForm
 
-"""Create ProfileListView class"""
 class ProfileListView(ListView):
+    """Create ProfileListView class"""
     model = Profile
     template_name = 'mini_insta/show_all_profiles.html'
 
-"""Create ProfileDetailView class"""
 class ProfileDetailView(DetailView):
+    """Create ProfileDetailView class"""
     model = Profile
     template_name = 'mini_insta/show_profile.html'
 
-"""Create PostDetailView class"""
 class PostDetailView(DetailView):
+    """Create PostDetailView class"""
     model = Post 
     template_name = 'mini_insta/show_post.html'
 
-"""Create PostDetailView class"""
 class CreatePostView(CreateView):
+    """Create PostDetailView class"""
     model = Post
     form_class = CreatePostForm
     template_name = 'mini_insta/create_post_form.html'

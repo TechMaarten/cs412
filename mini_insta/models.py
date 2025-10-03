@@ -2,8 +2,8 @@
 from django.db import models
 from django.utils import timezone
 
-"""Created the class Profile"""
 class Profile(models.Model):
+    """Created the class Profile"""
     username = models.CharField(max_length=100)
     display_name = models.CharField(max_length=100)
     profile_image_url = models.URLField()
@@ -18,8 +18,8 @@ class Profile(models.Model):
     def get_all_posts(self):
         return Post.objects.filter(profile=self).order_by("-timestamp")
 
-#post class
 class Post(models.Model):
+    """Created the Post class"""
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
     timestamp = models.DateTimeField(default=timezone.now)
     caption = models.TextField(blank=True)
@@ -31,8 +31,8 @@ class Post(models.Model):
     def get_all_photos(self):
         return Photo.objects.filter(post=self).order_by("timestamp")
     
-#photo class
 class Photo(models.Model):
+    """Created the Photo class"""
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     image_url = models.URLField()
     timestamp = models.DateTimeField(default=timezone.now)
