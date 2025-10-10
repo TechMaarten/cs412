@@ -2,9 +2,10 @@
 {% extends 'mini_insta/base.html' %}
 {% block content %}
     <h2>Create a post for {{ profile.display_name }}</h2>
-    <form method="POST">
+    <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}   
+        <input type="file" name="files" multiple>
         <button type="submit">Submit</button><br><br>
         <a href="{% url 'show_profile' profile.pk %}">Cancel</a>
     </form>

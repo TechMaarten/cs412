@@ -1,6 +1,7 @@
 """mini_insta/models.py"""
 from django.db import models
 from django.utils import timezone
+from django.core.exceptions import ValidationError
 
 class Profile(models.Model):
     """Created the class Profile"""
@@ -34,10 +35,20 @@ class Post(models.Model):
 class Photo(models.Model):
     """Created the Photo class"""
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    image_url = models.URLField()
+    image_url = models.URLField(blank=True, null=True)
     timestamp = models.DateTimeField(default=timezone.now)
+    image_file = models.ImageField(upload_to="photos", blank=True, null=True)
 
     def __str__(self):
-        return f"Photo for Post {self.post.id}"
+        if self.image_url:
+            return f"Photo for Post {self.post.id}"
+        else:
+            return f"Photo for Post {self.post.id}"
     
+    
+    def get_image_url(self):
+        if self.image_file:
+            return self.image_file.url
+        else:
+            return self.image_url
 

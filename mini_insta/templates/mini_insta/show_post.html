@@ -5,7 +5,7 @@
     <p>{{ object.caption }}</p>
     <p>{{ object.timestamp }}</p>
     {% for photo in object.get_all_photos %}
-        <img src="{{ photo.image_url }}" width="300">
+        <img src="{{ photo.get_image_url }}" width="300">
     {% endfor %}
     <br>
     <br>
