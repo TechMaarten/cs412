@@ -1,7 +1,9 @@
+"""Maarten Lopes, lopesmaa@bu.edu"""
 """mini_insta/models.py"""
 from django.db import models
 from django.utils import timezone
 from django.core.exceptions import ValidationError
+from django.urls import reverse
 
 class Profile(models.Model):
     """Created the class Profile"""
@@ -18,7 +20,10 @@ class Profile(models.Model):
     #function to get all posts
     def get_all_posts(self):
         return Post.objects.filter(profile=self).order_by("-timestamp")
-
+    
+    def get_absolute_url(self):
+        return reverse("show_profile", args=[str(self.pk)])
+    
 class Post(models.Model):
     """Created the Post class"""
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)

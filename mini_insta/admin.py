@@ -1,3 +1,4 @@
+"""Maarten Lopes, lopesmaa@bu.edu"""
 from django.contrib import admin
 from .models import Profile, Photo, Post
 

@@ -1,0 +1,11 @@
+<!---Maarten Lopes, lopesmaa@bu.edu-->
+<!---delete a post-->
+{% extends 'mini_insta/base.html' %}
+{% block content %}
+    <h2>Delete Post</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit">Confirm</button>
+    </form>
+    <a href="{% url 'show_profile' post.profile.pk %}">Cancel</a>
+{% endblock %}

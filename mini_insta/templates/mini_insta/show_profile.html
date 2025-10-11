@@ -1,7 +1,9 @@
+<!---Maarten Lopes, lopesmaa@bu.edu-->
 <!---show each individual profile-->
 {% extends 'mini_insta/base.html' %}
 {% block content %}
 <!-- Display each detail -->
+    <a href="{% url 'update_profile' profile.pk %}">Update Profile</a>
     <h2>{{ object.display_name }}</h2>
     <img src="{{ object.profile_image_url }}" width="200">
     <p>@{{ object.username }}</p>
