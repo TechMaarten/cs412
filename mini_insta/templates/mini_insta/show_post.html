@@ -4,6 +4,15 @@
 {% block content %}
     <h2> {{object.profile.display_name}} </h2>
     <p>{{ object.caption }}</p>
+    <p>{{ object.get_likes|length }} Likes</p>
+    <h3>Comments</h3>
+        <ul>
+        {% for comment in object.get_all_comments %}
+            <li><b>{{ comment.profile.display_name }}:</b> {{ comment.text }}</li>
+        {% empty %}
+            <li>No comments yet</li>
+        {% endfor %}
+        </ul>
     <p>{{ object.timestamp }}</p>
     {% for photo in object.get_all_photos %}
         <img src="{{ photo.get_image_url }}" width="300">

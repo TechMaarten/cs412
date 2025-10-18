@@ -9,6 +9,16 @@
     <title>Document</title>
 </head>
 <body>
+    <nav>
+    {% if profile %}
+        <!-- Home / Feed -->
+        <a href="{% url 'show_feed' profile.pk %}">Feed</a> |
+        <!-- Search -->
+        <a href="{% url 'search' profile.pk %}">Search</a> |
+        <!-- Profile -->
+        <a href="{% url 'show_profile' profile.pk %}">Profile</a>
+    {% endif %}
+    </nav>
     {% block content %}
     {% endblock content %}
 </body>

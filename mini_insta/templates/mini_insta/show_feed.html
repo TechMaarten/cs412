@@ -1,0 +1,19 @@
+<!---Maarten Lopes, lopesmaa@bu.edu-->
+<!---shows feed-->
+{% extends 'mini_insta/base.html' %}
+{% block content %}
+<h2>{{ profile.display_name }}’s Feed</h2>
+
+{% for post in posts %}
+  <h3>{{ post.profile.display_name }}</h3>
+  <img src="{{ post.get_all_photos.first.get_image_url }}" width="300">
+  <p>{{ post.caption }}</p>
+  <p>{{ post.get_likes|length }} Likes</p>
+  <p>{{ post.get_all_comments|length }} Comments</p>
+{% empty %}
+  <p>No posts in your feed yet.</p>
+{% endfor %}
+
+<a href="{% url 'show_profile' profile.pk %}">Back to profile</a>
+{% endblock %}
+

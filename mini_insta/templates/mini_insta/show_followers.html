@@ -1,0 +1,12 @@
+<!---Maarten Lopes, lopesmaa@bu.edu-->
+<!---shows followers-->
+{% extends 'mini_insta/base.html' %}
+{% block content %}
+<h2>{{ profile.display_name }}’s Followers ({{ profile.get_num_followers }})</h2>
+<ul>
+  {% for follower in profile.get_followers %}
+    <li><a href="{% url 'show_profile' follower.pk %}">{{ follower.display_name }}</a></li>
+  {% endfor %}
+</ul>
+<a href="{% url 'show_profile' profile.pk %}">Back</a>
+{% endblock %}

@@ -8,6 +8,11 @@
     <img src="{{ object.profile_image_url }}" width="200">
     <p>@{{ object.username }}</p>
     <p>{{ object.bio_text }}</p>
+    <p>
+        <a href="{% url 'show_followers' profile.pk %}">{{ profile.get_num_followers }} Followers</a> 
+        <a href="{% url 'show_following' profile.pk %}">{{ profile.get_num_following }} Following</a>
+    </p>
+
     <a href="{% url 'create_post' object.pk %}">+ New Post</a>
     <p>Total posts: {{ object.get_all_posts.count }}</p>
     <h3>Posts</h3>

@@ -1,0 +1,11 @@
+<!---Maarten Lopes, lopesmaa@bu.edu-->
+<!---delete a post-->
+{% extends 'mini_insta/base.html' %}
+{% block content %}
+<h2>Search</h2>
+<form method="get" action="{% url 'search' profile.pk %}">
+  <input type="text" name="query" placeholder="Search users or posts">
+  <button type="submit">Search</button>
+</form>
+{% endblock %}
+

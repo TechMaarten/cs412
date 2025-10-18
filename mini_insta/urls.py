@@ -1,7 +1,7 @@
 """Maarten Lopes, lopesmaa@bu.edu"""
 """mini_insta/urls.py"""
 from django.urls import path
-from .views import ProfileListView, ProfileDetailView, PostDetailView, CreatePostView, UpdateProfileView, DeletePostView, UpdatePostView
+from .views import ProfileListView, ProfileDetailView, PostDetailView, CreatePostView, UpdateProfileView, DeletePostView, UpdatePostView, PostFeedListView, ShowFollowersDetailView, ShowFollowingDetailView, SearchView
 
 """Create urlpatterns"""
 urlpatterns = [
@@ -12,4 +12,9 @@ urlpatterns = [
     path("profile/<int:pk>/update", UpdateProfileView.as_view(), name="update_profile"),
     path("profile/<int:pk>/delete", DeletePostView.as_view(), name="delete_post"),
     path("profile/<int:pk>/update_post", UpdatePostView.as_view(), name="update_post"),
+    path('profile/<int:pk>/followers', ShowFollowersDetailView.as_view(), name='show_followers'),
+    path('profile/<int:pk>/following', ShowFollowingDetailView.as_view(), name='show_following'),
+    path('profile/<int:pk>/feed', PostFeedListView.as_view(), name='show_feed'),
+    path('profile/<int:pk>/search', SearchView.as_view(), name='search'),
+
 ]

@@ -1,0 +1,35 @@
+<!---Maarten Lopes, lopesmaa@bu.edu-->
+<!---a html page for creating a post-->
+{% extends 'mini_insta/base.html' %}
+{% block content %}
+<h2>Search Results for "{{ query }}"</h2>
+
+<h3>Profiles</h3>
+<ul>
+{% for p in matching_profiles %}
+  <li><a href="{% url 'show_profile' p.pk %}">{{ p.display_name }}</a></li>
+{% empty %}
+  <li>No matching profiles found.</li>
+{% endfor %}
+</ul>
+
+<h3>Posts</h3>
+<ul>
+{% for post in posts %}
+  <li>
+    <strong>{{ post.profile.display_name }}</strong><br>
+    {% for photo in post.get_all_photos %}
+      <img src="{{ photo.get_image_url }}" width="200">
+    {% endfor %}
+    <p>{{ post.caption }}</p>
+  </li>
+{% empty %}
+  <li>No matching posts found.</li>
+{% endfor %}
+</ul>
+
+<a href="{% url 'search' profile.pk %}">New search</a> |
+<a href="{% url 'show_profile' profile.pk %}">Back to Profile</a>
+{% endblock %}
+
+

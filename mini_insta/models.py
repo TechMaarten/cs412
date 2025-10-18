@@ -24,6 +24,24 @@ class Profile(models.Model):
     def get_absolute_url(self):
         return reverse("show_profile", args=[str(self.pk)])
     
+    def get_followers(self):
+        follows = Follow.objects.filter(profile=self)
+        return [f.follower_profile for f in follows]
+
+    def get_num_followers(self):
+        return len(self.get_followers())
+
+    def get_following(self):
+        follows = Follow.objects.filter(follower_profile=self)
+        return [f.profile for f in follows]
+
+    def get_num_following(self):
+        return len(self.get_following())
+    
+    def get_post_feed(self):
+        following_profiles = [f.profile for f in Follow.objects.filter(follower_profile=self)]
+        return Post.objects.filter(profile__in=following_profiles).order_by("-timestamp")
+
 class Post(models.Model):
     """Created the Post class"""
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
@@ -36,6 +54,12 @@ class Post(models.Model):
     #function to get all the photos
     def get_all_photos(self):
         return Photo.objects.filter(post=self).order_by("timestamp")
+    
+    def get_all_comments(self):
+        return Comment.objects.filter(post=self)
+
+    def get_likes(self):
+        return Like.objects.filter(post=self)
     
 class Photo(models.Model):
     """Created the Photo class"""
@@ -57,3 +81,27 @@ class Photo(models.Model):
         else:
             return self.image_url
 
+class Follow(models.Model):
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name="profile")
+    follower_profile = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name="follower_profile")
+    timestamp = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return f"{self.follower_profile.display_name} follows {self.profile.display_name}"
+
+class Like(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    timestamp = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return f"{self.profile.display_name} liked Post {self.post.id}"
+
+class Comment(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    timestamp = models.DateTimeField(default=timezone.now)
+    text = models.TextField()
+
+    def __str__(self):
+        return f"{self.profile.display_name} commented: {self.text[:25]}"
