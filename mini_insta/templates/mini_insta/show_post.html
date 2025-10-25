@@ -13,17 +13,23 @@
             <li>No comments yet</li>
         {% endfor %}
         </ul>
+    {% if user.is_authenticated and object.profile != request.user.profile %}
+        <a href="{% url 'like_post' object.pk %}">Like</a> 
+        <a href="{% url 'delete_like' object.pk %}">Unlike</a>
+    {% endif %}
     <p>{{ object.timestamp }}</p>
     {% for photo in object.get_all_photos %}
         <img src="{{ photo.get_image_url }}" width="300">
     {% endfor %}
     <br>
     <br>
+    {% if request.user.is_authenticated and post.profile.user == request.user %}
     <a href="{% url 'update_post' post.pk %}">Edit</a>
     <br>
     <br>
     <a href="{% url 'delete_post' post.pk %}">Delete</a>
     <br>
     <br>
+    {% endif %}
     <a href="{% url 'show_profile' object.profile.pk %}">Back to profile</a>
 {% endblock %}

@@ -1,0 +1,14 @@
+<!---Maarten Lopes, lopesmaa@bu.edu-->
+<!---a html page for creating a post-->
+{% extends "mini_insta/base.html" %}
+{% block content %}
+  <h2>Create Profile</h2>
+  <form method="post">
+    {% csrf_token %}
+    <h3>Account Info</h3>
+    {{ user_form.as_p }}
+    <h3>Profile Info</h3>
+    {{ form.as_p }}
+    <button type="submit">Register</button>
+  </form>
+{% endblock %}

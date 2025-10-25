@@ -10,13 +10,22 @@
 </head>
 <body>
     <nav>
-    {% if profile %}
-        <!-- Home / Feed -->
-        <a href="{% url 'show_feed' profile.pk %}">Feed</a> |
+    {% if user.is_authenticated %}
+        <!-- Feed -->
+        <a href="{% url 'show_feed' %}">Feed</a> |
         <!-- Search -->
-        <a href="{% url 'search' profile.pk %}">Search</a> |
+        <a href="{% url 'search' %}">Search</a> |
         <!-- Profile -->
-        <a href="{% url 'show_profile' profile.pk %}">Profile</a>
+        <a href="{% url 'show_own_profile' %}">My Profile</a>
+        <br>
+        <br>
+        <form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <button type="submit">Logout</button>
+        </form>
+    {% else %}
+        <a href="{% url 'login' %}">Login</a>
+        <a href="{% url 'register' %}">Register</a>
     {% endif %}
     </nav>
     {% block content %}

@@ -4,9 +4,11 @@ from django.db import models
 from django.utils import timezone
 from django.core.exceptions import ValidationError
 from django.urls import reverse
+from django.contrib.auth.models import User
 
 class Profile(models.Model):
     """Created the class Profile"""
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     username = models.CharField(max_length=100)
     display_name = models.CharField(max_length=100)
     profile_image_url = models.URLField()
