@@ -1,0 +1,35 @@
+<!---Maarten Lopes, lopesmaa@bu.edu-->
+<!---voter list-->
+{% extends "voter_analytics/base.html" %}
+{% block content %}
+<h1>Newton Voters</h1>
+<form method="get">
+    {{ form.as_p }}
+    <button type="submit">Filter</button>
+</form>
+
+<table>
+<tr><th>Name</th><th>Address</th><th>DOB</th><th>Party</th><th>Score</th></tr>
+{% for voter in voters %}
+<tr>
+    <td><a href="{% url 'voter' voter.pk %}">{{ voter.last_name }}, {{ voter.first_name }}</a></td>
+    <td>{{ voter.street_number }} {{ voter.street_name }}</td>
+    <td>{{ voter.date_of_birth }}</td>
+    <td>{{ voter.party }}</td>
+    <td>{{ voter.voter_score }}</td>
+</tr>
+{% endfor %}
+</table>
+
+<div class="pagination">
+{% if is_paginated %}
+    {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+    {% endif %}
+    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+    {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">Next</a>
+    {% endif %}
+{% endif %}
+</div>
+{% endblock %}

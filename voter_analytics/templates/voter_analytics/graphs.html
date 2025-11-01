@@ -1,0 +1,20 @@
+<!---Maarten Lopes, lopesmaa@bu.edu-->
+<!---graphs-->
+{% extends "voter_analytics/base.html" %}
+{% block content %}
+<h1>Voter Analytics Graphs</h1>
+
+<form method="get">
+    {{ form.as_p }}
+    <button type="submit">Filter</button>
+</form>
+
+<h2>Voters by Year of Birth</h2>
+{{ birth_chart|safe }}
+
+<h2>Party Distribution</h2>
+{{ party_chart|safe }}
+
+<h2>Election Participation</h2>
+{{ participation_chart|safe }}
+{% endblock %}
