@@ -9,7 +9,7 @@ urlpatterns = [
     path('pictures', views.pictures_list),
     path('picture/<int:pk>', views.picture_detail),
 
-    path('api/', views.index),
+    path('api/', api_views.api_random),
     path('api/random', api_views.api_random),
     path('api/random_picture', api_views.api_random_picture),
 
