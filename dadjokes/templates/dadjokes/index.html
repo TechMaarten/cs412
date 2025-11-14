@@ -1,0 +1,9 @@
+{% extends 'formdata/base.html' %}
+
+{% block content %}
+<h1>{{ joke.text }}</h1>
+<p>By {{ joke.contributor }}</p>
+
+<img src="{{ pic.image_url }}" width="300">
+<p>Picture by {{ pic.contributor }}</p>
+{% endblock content %}

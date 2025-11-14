@@ -1,0 +1,8 @@
+{% extends 'formdata/base.html' %}
+
+{% block content %}
+<h1>All Jokes</h1>
+{% for j in jokes %}
+<p>{{ j.text }} — {{ j.contributor }}</p>
+{% endfor %}
+{% endblock content %}

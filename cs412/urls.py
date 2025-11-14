@@ -26,6 +26,7 @@ urlpatterns = [
     path("restaurant/", include("restaurant.urls")),
     path("", include("mini_insta.urls")),
     path("voter_analytics/", include("voter_analytics.urls")),
+    path('dadjokes/', include('dadjokes.urls')),
 ]
 
 if settings.DEBUG:
