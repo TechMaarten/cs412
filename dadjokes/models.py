@@ -1,3 +1,5 @@
+"""Maarten Lopes, lopesmaa@bu.edu"""
+"""dadjokes/models.py"""
 from django.db import models
 
 class Joke(models.Model):

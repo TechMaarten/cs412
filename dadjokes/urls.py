@@ -1,3 +1,5 @@
+"""Maarten Lopes, lopesmaa@bu.edu"""
+"""dadjokes/urls.py"""
 from django.urls import path
 from . import views, api_views
 

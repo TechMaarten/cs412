@@ -1,3 +1,5 @@
+"""Maarten Lopes, lopesmaa@bu.edu"""
+"""dadjokes/serializers.py"""
 from rest_framework import serializers
 from .models import Joke, Picture
 
