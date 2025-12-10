@@ -1,0 +1,22 @@
+<!---Maarten Lopes, lopesmaa@bu.edu-->
+<!---base-->
+{% load static %}
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Travel Planner</title>
+    <link rel="stylesheet" href="{% static 'project/styles.css' %}">
+</head>
+<body>
+<header>
+    <a href="{% url 'project:trip_list' %}">Trips</a>
+    <a href="{% url 'project:trip_add' %}">New Trip</a>
+    <a href="{% url 'project:activity_report' %}">Activity Report</a>
+</header>
+
+<main>
+    {% block content %}
+    {% endblock %}
+</main>
+</body>
+</html>

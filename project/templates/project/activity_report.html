@@ -1,0 +1,50 @@
+<!---Maarten Lopes, lopesmaa@bu.edu-->
+<!---show activity report-->
+{% extends 'project/base.html' %}
+
+{% block content %}
+<h1>Activity Report</h1>
+
+<div class="card">
+    <h2>Filter Activities</h2>
+    <form method="get">
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Apply Filters</button>
+        <a href="{% url 'project:activity_report' %}" class="btn btn-secondary">Clear</a>
+    </form>
+</div>
+
+<div class="card">
+    <h2>Results</h2>
+    <p>Total cost of activities: <strong>${{ total_cost|floatformat:2 }}</strong></p>
+
+    {% if activities %}
+        <table>
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Trip</th>
+                <th>Destination</th>
+                <th>Date</th>
+                <th>Category</th>
+                <th>Cost</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for act in activities %}
+                <tr>
+                    <td>{{ act.name }}</td>
+                    <td>{{ act.destination.trip.title }}</td>
+                    <td>{{ act.destination.city }}, {{ act.destination.country }}</td>
+                    <td>{{ act.date }}</td>
+                    <td>{{ act.category }}</td>
+                    <td>${{ act.cost|default:"0.00" }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No activities match your filters.</p>
+    {% endif %}
+</div>
+{% endblock %}

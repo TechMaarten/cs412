@@ -1,0 +1,15 @@
+<!---Maarten Lopes, lopesmaa@bu.edu-->
+<!---show activity form-->
+{% extends 'project/base.html' %}
+
+{% block content %}
+<h1>{% if form.instance.pk %}Edit Activity{% else %}Add Activity{% endif %}</h1>
+<div class="card">
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a href="{% url 'project:trip_list' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

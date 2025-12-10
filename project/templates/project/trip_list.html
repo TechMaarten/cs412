@@ -1,0 +1,36 @@
+<!---Maarten Lopes, lopesmaa@bu.edu-->
+<!---show trip list-->
+{% extends 'project/base.html' %}
+
+{% block content %}
+<h1>Your Trips</h1>
+
+<div class="card">
+    {% if trips %}
+        <table>
+            <thead>
+            <tr>
+                <th>Title</th>
+                <th>Dates</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for trip in trips %}
+                <tr>
+                    <td>{{ trip.title }}</td>
+                    <td>{{ trip.start_date }} → {{ trip.end_date }}</td>
+                    <td>
+                        <a href="{% url 'project:trip_detail' trip.pk %}" class="btn btn-secondary">
+                            View
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No trips yet. <a href="{% url 'project:trip_add' %}">Create your first trip.</a></p>
+    {% endif %}
+</div>
+{% endblock %}

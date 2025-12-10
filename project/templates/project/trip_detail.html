@@ -1,0 +1,103 @@
+<!---Maarten Lopes, lopesmaa@bu.edu-->
+<!---show trip detail-->
+{% extends 'project/base.html' %}
+
+{% block content %}
+<h1>{{ trip.title }}</h1>
+<p class="muted">{{ trip.start_date }} → {{ trip.end_date }}</p>
+<p>{{ trip.description }}</p>
+
+<p>
+    <a href="{% url 'project:trip_edit' trip.pk %}" class="btn btn-secondary">Edit Trip</a>
+    <a href="{% url 'project:trip_delete' trip.pk %}" class="btn btn-danger">Delete Trip</a>
+</p>
+
+<div class="card">
+    <h2>Destinations</h2>
+    <p><a href="{% url 'project:destination_add' trip.pk %}" class="btn btn-primary">Add Destination</a></p>
+
+    {% if destinations %}
+        <ul>
+            {% for dest in destinations %}
+                <li>
+                    <strong>{{ dest.city }}, {{ dest.country }}</strong>
+                    ({{ dest.arrival_date }} → {{ dest.departure_date }})
+                    <a href="{% url 'project:destination_edit' dest.pk %}" class="btn btn-secondary">Edit</a>
+                    <a href="{% url 'project:destination_delete' dest.pk %}" class="btn btn-danger">Delete</a>
+                    <br>
+                    <em>{{ dest.notes }}</em>
+                    <br>
+                    <a href="{% url 'project:activity_add' dest.pk %}" class="btn btn-primary">
+                        Add Activity
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No destinations yet.</p>
+    {% endif %}
+</div>
+
+<div class="card">
+    <h2>Packing List</h2>
+    <p><a href="{% url 'project:packing_add' trip.pk %}" class="btn btn-primary">Add Item</a></p>
+
+    {% if packing_items %}
+        <table>
+            <thead>
+            <tr>
+                <th>Item</th>
+                <th>Qty</th>
+                <th>Packed?</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in packing_items %}
+                <tr>
+                    <td>{{ item.item_name }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>{% if item.packed %}✅{% else %}❌{% endif %}</td>
+                    <td>
+                        <a href="{% url 'project:packing_edit' item.pk %}" class="btn btn-secondary">Edit</a>
+                        <a href="{% url 'project:packing_delete' item.pk %}" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No packing items yet.</p>
+    {% endif %}
+</div>
+
+<div class="card">
+    <h2>Activities (Overview)</h2>
+    <p class="muted">For detailed filtering, see the Activity Report page.</p>
+    {% for dest in destinations %}
+        <h3>{{ dest.city }}, {{ dest.country }}</h3>
+
+        {% if dest.activities.all %}
+            <ul>
+                {% for act in dest.activities.all %}
+                    <li>
+                        <strong>{{ act.name }}</strong>
+                        – {{ act.date }} {{ act.time }}
+                        ({{ act.category }}, ${{ act.cost|default:"0.00" }})
+                        <a href="{% url 'project:activity_edit' act.pk %}" class="btn btn-secondary">Edit</a>
+                        <a href="{% url 'project:activity_delete' act.pk %}" class="btn btn-danger">Delete</a>
+                        <br>
+                        <span class="muted">{{ act.description }}</span>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="muted">No activities for this destination yet.</p>
+        {% endif %}
+
+    {% empty %}
+        <p class="muted">No destinations yet, so no activities.</p>
+    {% endfor %}
+</div>
+
+{% endblock %}
